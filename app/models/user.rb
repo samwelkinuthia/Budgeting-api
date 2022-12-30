@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   rolify
   resourcify
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
   after_create :assign_default_role
