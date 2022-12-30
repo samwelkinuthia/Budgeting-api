@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   before_create :call_log
 
+
+
   after_create :assign_default_role
 
   # Include default devise modules. Others available are:
@@ -23,5 +25,6 @@ class User < ActiveRecord::Base
   def call_log
     puts self.email, "=================================="
   end
+
 end
 
