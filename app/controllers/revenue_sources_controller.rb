@@ -5,8 +5,7 @@ class RevenueSourcesController < ApplicationController
   # GET /revenue_sources
   def index
     @revenue_sources = RevenueSource.all
-
-    render json: @revenue_sources
+    json_response(@revenue_sources, :ok,  [], true, "#{@revenue_sources.count} records found")
   end
 
   # GET /revenue_sources/1
@@ -19,9 +18,11 @@ class RevenueSourcesController < ApplicationController
     @revenue_source = RevenueSource.new(revenue_source_params)
 
     if @revenue_source.save
-      render json: {success: true, data: @revenue_source, errors:  @revenue_source.errors.full_messages}, status: :created
+      json_response(@revenue_source, :created, [], true, "Revenue Source added successfully!")
+      # render json: {success: true, data: @revenue_source, errors:  @revenue_source.errors.full_messages}, status: :created
     else
-      render json: {success: false, errors: @revenue_source.errors.full_messages}, status: :unprocessable_entity
+      json_response(nil, :unprocessable_entity,  @revenue_source.errors, false)
+      # render json: {success: false, errors: @revenue_source.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+  before_create :call_log
 
   after_create :assign_default_role
 
@@ -16,8 +17,11 @@ class User < ActiveRecord::Base
 
   def assign_default_role
     # binding.pry
-    self.add_role(:SystemAdmin, User) if self.roles.blank?
+    # self.add_role(:SystemAdmin, User) if self.roles.blank?
     # self.add_role(:system_admin) if self.roles.blank?
+  end
+  def call_log
+    puts self.email, "=================================="
   end
 end
 

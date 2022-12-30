@@ -23,12 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_111159) do
   create_table "county_budgets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "fiscal_year_id", null: false
     t.bigint "county_id", null: false
-    t.decimal "totalBudget", precision: 16, scale: 2
-    t.decimal "totalExpenditure", precision: 16, scale: 2
-    t.decimal "totalRevenue", precision: 16, scale: 2
-    t.decimal "totalPendingBills", precision: 16, scale: 2
-    t.decimal "absorptionRate", precision: 3, scale: 2
-    t.decimal "totalBalance", precision: 16, scale: 2
+    t.decimal "totalBudget", precision: 16, scale: 2, default: "0.0"
+    t.decimal "totalExpenditure", precision: 16, scale: 2, default: "0.0"
+    t.decimal "totalRevenue", precision: 16, scale: 2, default: "0.0"
+    t.decimal "totalPendingBills", precision: 16, scale: 2, default: "0.0"
+    t.decimal "absorptionRate", precision: 5, scale: 2, default: "0.0"
+    t.decimal "totalBalance", precision: 16, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["county_id"], name: "index_county_budgets_on_county_id"

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'county_budgets/:countyId/:fiscalYearId', to: "county_budgets#create"
   resources :county_budgets
   resources :revenue_sources
   resources :fiscal_years
