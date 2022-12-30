@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_081120) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_30_111159) do
   create_table "counties", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
@@ -18,6 +18,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_081120) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_counties_on_code", unique: true
     t.index ["name"], name: "index_counties_on_name", unique: true
+  end
+
+  create_table "county_budgets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "fiscal_year_id", null: false
+    t.bigint "county_id", null: false
+    t.decimal "totalBudget", precision: 16, scale: 2
+    t.decimal "totalExpenditure", precision: 16, scale: 2
+    t.decimal "totalRevenue", precision: 16, scale: 2
+    t.decimal "totalPendingBills", precision: 16, scale: 2
+    t.decimal "absorptionRate", precision: 3, scale: 2
+    t.decimal "totalBalance", precision: 16, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["county_id"], name: "index_county_budgets_on_county_id"
+    t.index ["fiscal_year_id"], name: "index_county_budgets_on_fiscal_year_id"
   end
 
   create_table "fiscal_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -78,4 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_081120) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "county_budgets", "counties"
+  add_foreign_key "county_budgets", "fiscal_years"
 end
