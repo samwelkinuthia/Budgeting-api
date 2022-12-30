@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users', to: 'users#index'
+  get 'users/:id', to: 'users#show'
+  put 'users/:id', to: 'users#update'
   post 'county_budgets/:countyId/:fiscalYearId', to: "county_budgets#create"
   resources :county_budgets
   resources :revenue_sources

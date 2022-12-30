@@ -16,7 +16,8 @@ Role.create!(name: :Department_Admin, resource_type: User)
 Role.create!(name: :System_Admin, resource_type: User)
 
 User.create!(email: "sam@sam.com", password: "samsam", password_confirmation: "samsam")
-UserRole.create!(user_id: 1, role_id: 2)
+
+User.all.add_role(:System_Admin)
 
 3.times do
   FiscalYear.create!(name: "#{rand(1950..2010).to_s + "-" + rand(2011..2050).to_s}", date_from: Faker::Date.forward(days: 1).to_datetime, date_to: Faker::Date.forward(days: 365).to_datetime)
