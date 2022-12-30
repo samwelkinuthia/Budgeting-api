@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_25_023231) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_30_022742) do
   create_table "counties", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_25_023231) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_counties_on_code", unique: true
     t.index ["name"], name: "index_counties_on_name", unique: true
+  end
+
+  create_table "fiscal_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_fiscal_years_on_name", unique: true
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
