@@ -5,7 +5,7 @@ class RevenueSourcesController < ApplicationController
   # GET /revenue_sources
   def index
     @revenue_sources = RevenueSource.all
-    json_response(@revenue_sources, :ok,  [], true, "#{@revenue_sources.count} records found")
+    json_response(@revenue_sources, :ok,  [], true, "#{@revenue_sources.length} records found")
   end
 
   # GET /revenue_sources/1
