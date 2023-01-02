@@ -17,11 +17,36 @@ Role.create!(name: :System_Admin, resource_type: User)
 
 User.create!(email: "sam@sam.com", password: "samsam", password_confirmation: "samsam")
 
-User.all.add_role(:System_Admin)
+# User.all.add_role(:System_Admin)
 
-3.times do
-  FiscalYear.create!(name: "#{rand(1950..2010).to_s + "-" + rand(2011..2050).to_s}", date_from: Faker::Date.forward(days: 1).to_datetime, date_to: Faker::Date.forward(days: 365).to_datetime)
-end
+# 3.times do
+#   FiscalYear.create!(name: "#{rand(1950..2010).to_s + "-" + rand(2011..2050).to_s}", date_from: Faker::Date.forward(days: 1).to_datetime, date_to: Faker::Date.forward(days: 365).to_datetime)
+# end
 3.times do
   County.create!(counties.sample)
+end
+
+[
+  "2021/22",
+  "2020/21",
+  "2019/20",
+  "2018/19",
+  "2017/18"
+].each do |item|
+  FiscalYear.create!({name:item, date_from: Faker::Date.forward(days: 1).to_datetime, date_to: Faker::Date.forward(days: 365).to_datetime})
+end
+
+[
+  "Health",
+  "Lands",
+  "Trade",
+  "Education, Sports & ICT",
+  "Gender",
+  "Transport",
+  "Agriculture",
+  "Water",
+  "Finance",
+  "GVN CS"
+].each do | item|
+  Department.create!({name: item, county_id: County.first.id})
 end
