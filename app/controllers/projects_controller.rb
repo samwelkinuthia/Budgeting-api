@@ -5,8 +5,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @projects = Project.includes(:fiscal_year).all
+    json_response(@projects, :ok,  [], true, "#{@projects.size} records found")
 
-    render json: @projects
   end
 
   # GET /projects/1
@@ -14,9 +14,8 @@ class ProjectsController < ApplicationController
     render json: @project
   end
 
-  # POST /projects
-  def create
 
+  def import
     quote_chars = %w(" | ~ ^ & *)
 
     begin
@@ -25,15 +24,9 @@ class ProjectsController < ApplicationController
     rescue CSV::MalformedCSVError
       quote_chars.empty? ? raise : retry
     end
-    # csv = CSV.parse(file, headers: true, col_sep: ";")
 
     x = csv.map(&:to_h)
 
-    # binding.pry
-
-    # [24] pry(#<ProjectsController>)> y["samson"] = y.delete(y.keys[0])
-
-    # x[0] = x[0].keys[0].gsub(/[^0-9a-z ]/i, '')
     z = []
     count = Project.all.size
     x.each do |row|
@@ -43,34 +36,21 @@ class ProjectsController < ApplicationController
       user_hash[:location] = row['location']
       user_hash[:ward] = row['ward']
       user_hash[:budgetAmount] = row['budgetAmount'].gsub(/[^0-9\.]/, '').to_d
-      user_hash[:department_id] = 1
-      user_hash[:fiscal_year_id] = 1
+      user_hash[:department_id] = project_params[:department_id]
+      user_hash[:fiscal_year_id] = project_params[:fiscal_year_id]
+      user_hash[:revenue_source_id] = project_params[:revenue_source_id]
       z.push(user_hash)
     end
-    # statuses = x.pluck("status").uniq
-    # fiscal_years = x.pluck("fiscal_year").uniq
-    # locations = x.pluck("location").uniq
-    # wards = x.pluck("ward").uniq
-    # departments = x.pluck("department").uniq
-
-    # render json: {body:z[0..28]}
-
-    a = Project.insert_all(z)
-
-    count2 = Project.all.size
-
-
-    render json: {data: nil, success: true, message:count2 > count ? "Successfully added #{count2 - count} records" : "Error Unprocessable Entity"}
-
-
-
-    # @project = Project.new(project_params)
-    #
-    # if @project.save
-    #   render json: @project, status: :created, location: @project
-    # else
-    #   render json: @project.errors, status: :unprocessable_entity
-    # end
+    import_csv(z)
+  end
+  # POST /projects
+  def create
+    @project = Project.new(project_params)
+    if @project.save
+      render json: @project, status: :created, location: @project
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /projects/1
@@ -95,6 +75,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.permit(:title, :description, :department_id, :ward, :location, :status, :budgetAmount, :fiscal_year_id, :file)
+      params.permit(:title, :description, :department_id, :ward, :location, :status, :budgetAmount, :fiscal_year_id, :file, :revenue_source_id)
     end
 end

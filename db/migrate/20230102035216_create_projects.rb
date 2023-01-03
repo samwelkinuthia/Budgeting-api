@@ -3,6 +3,7 @@ class CreateProjects < ActiveRecord::Migration[7.0]
     create_table :projects do |t|
       t.string :title, unique: true, null: false
       t.string :description
+      t.references :revenue_source, null: false, foreign_key: true
       t.references :department, null: false, foreign_key: true
       t.string :ward
       t.string :location
@@ -14,6 +15,5 @@ class CreateProjects < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :projects, [:title, :department_id, :fiscal_year_id], unique: true
   end
 end

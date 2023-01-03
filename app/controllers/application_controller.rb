@@ -1,9 +1,16 @@
 class ApplicationController < ActionController::API
-        include Response
+        include Response, Csv
         before_action :configure_permitted_parameters, if: :devise_controller?
         rescue_from ActionController::Redirecting::UnsafeRedirectError do
                 redirect_to "http://localhost:3001", allow_other_host: true
         end
+        rescue_from ActiveRecord::RecordNotUnique do |exception|
+                render json: { message: exception.message, success:false}, status: :unprocessable_entity
+        end
+        rescue_from ActiveRecord::RecordInvalid do |exception|
+                render json: { message: exception.message, success:false}, status: :unprocessable_entity
+        end
+
         include DeviseTokenAuth::Concerns::SetUserByToken
 
         protected

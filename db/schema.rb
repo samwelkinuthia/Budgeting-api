@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.string "description"
+    t.bigint "revenue_source_id", null: false
     t.bigint "department_id", null: false
     t.string "ward"
     t.string "location"
@@ -67,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_projects_on_department_id"
     t.index ["fiscal_year_id"], name: "index_projects_on_fiscal_year_id"
-    t.index ["title", "department_id", "fiscal_year_id"], name: "index_projects_on_title_and_department_id_and_fiscal_year_id", unique: true
+    t.index ["revenue_source_id"], name: "index_projects_on_revenue_source_id"
   end
 
   create_table "revenue_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -124,4 +125,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
   add_foreign_key "departments", "counties"
   add_foreign_key "projects", "departments"
   add_foreign_key "projects", "fiscal_years"
+  add_foreign_key "projects", "revenue_sources"
 end

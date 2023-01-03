@@ -50,3 +50,13 @@ end
 ].each do | item|
   Department.create!({name: item, county_id: County.first.id})
 end
+
+[
+  "National Government",
+  "Local Revenue",
+  "Exchequer",
+  "Balance Brought Forward",
+  "Conditional Grants"
+].each do | item|
+  RevenueSource.create!({name: item})
+end
