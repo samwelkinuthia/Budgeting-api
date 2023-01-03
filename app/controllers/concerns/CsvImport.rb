@@ -1,4 +1,4 @@
-module Csv
+module CsvImport
   def import_csv(csv_file)
 
     a = Project.import! csv_file, validate: true, validate_uniqueness: true

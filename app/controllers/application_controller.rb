@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-        include Response, Csv
+        include Response, CsvImport
         before_action :configure_permitted_parameters, if: :devise_controller?
         rescue_from ActionController::Redirecting::UnsafeRedirectError do
                 redirect_to "http://localhost:3001", allow_other_host: true

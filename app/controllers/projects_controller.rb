@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
       user_hash[:location] = row['location']
       user_hash[:ward] = row['ward']
       user_hash[:budgetAmount] = row['budgetAmount'].gsub(/[^0-9\.]/, '').to_d
-      user_hash[:department_id] = project_params[:department_id]
+      user_hash[:department_id] = params[:department_id]
       user_hash[:fiscal_year_id] = project_params[:fiscal_year_id]
       user_hash[:revenue_source_id] = project_params[:revenue_source_id]
       z.push(user_hash)
@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: @project, status: :created
     else
       render json: @project.errors, status: :unprocessable_entity
     end

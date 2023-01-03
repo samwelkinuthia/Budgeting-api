@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :counties do
     resources :county_budgets
     resources :departments do
+      post 'import', to: 'projects#import'
       resources :projects
     end
   end
