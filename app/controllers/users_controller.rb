@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user,  only: %i[ show update destroy ]
   def index
     @users = User.all
-    json_response(ActiveModelSerializers::SerializableResource.new(@users, each_serializer: UserSerializer), :ok,  [], true, "#{@users.count} users found")
+    json_response(@users, :ok,  [], true, "#{@users.size} records found")
   end
 
   def show

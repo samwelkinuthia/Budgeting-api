@@ -38,6 +38,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "county_id", null: false
     t.string "name"
+    t.decimal "totalBudget", precision: 16, scale: 2, default: "0.0"
+    t.decimal "developmentBudget", precision: 16, scale: 2, default: "0.0"
+    t.decimal "recurrentBudget", precision: 16, scale: 2, default: "0.0"
+    t.decimal "pendingBills", precision: 16, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["county_id"], name: "index_departments_on_county_id"

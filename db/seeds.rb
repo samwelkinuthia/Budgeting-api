@@ -22,8 +22,12 @@ User.create!(email: "sam@sam.com", password: "samsam", password_confirmation: "s
 # 3.times do
 #   FiscalYear.create!(name: "#{rand(1950..2010).to_s + "-" + rand(2011..2050).to_s}", date_from: Faker::Date.forward(days: 1).to_datetime, date_to: Faker::Date.forward(days: 365).to_datetime)
 # end
-3.times do
-  County.create!(counties.sample)
+# 10.times do
+#   County.create!(counties.sample)
+# end
+
+counties[0..10].each do |item|
+  County.create!(item)
 end
 
 [
@@ -48,7 +52,8 @@ end
   "Finance",
   "GVN CS"
 ].each do | item|
-  Department.create!({name: item, county_id: County.first.id})
+  x = {name:item, totalBudget:rand(10000000..100000000).to_d, developmentBudget:rand(1000000..10000000).to_d, recurrentBudget:rand(1000000..10000000).to_d, pendingBills:rand(1000000..10000000).to_d, county_id: County.all.ids.sample}
+  Department.create!(x)
 end
 
 [

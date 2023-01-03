@@ -44,6 +44,6 @@ class DepartmentsController < ApplicationController
     end
     # Only allow a list of trusted parameters through.
     def department_params
-      params.permit(:county_id, :name)
+      params.permit(:county_id, :name, :totalBudget, :developmentBudget, :recurrentBudget, :pendingBills)
     end
 end
