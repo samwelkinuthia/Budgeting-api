@@ -52,7 +52,7 @@ end
   "Finance",
   "GVN CS"
 ].each do | item|
-  x = {name:item, totalBudget:rand(10000000..100000000).to_d, developmentBudget:rand(1000000..10000000).to_d, recurrentBudget:rand(1000000..10000000).to_d, pendingBills:rand(1000000..10000000).to_d, county_id: County.all.ids.sample}
+  x = {name:item, totalBudget:rand(10000000..100000000).to_d, developmentBudget:rand(1000000..10000000).to_d, recurrentBudget:rand(1000000..10000000).to_d, pendingBills:rand(1000000..10000000).to_d, county_id: 1}
   Department.create!(x)
 end
 
@@ -65,3 +65,8 @@ end
 ].each do | item|
   RevenueSource.create!({name: item})
 end
+
+County.all.each do |item|
+  CountyBudget.create!({"fiscal_year_id": 1, "county_id": item.id,"totalBudget": rand(1000000..9999999)})
+end
+

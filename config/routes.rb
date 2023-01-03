@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reports', to: 'reports#index'
   get 'users', to: 'users#index'
   get 'users/:id', to: 'users#show'
   put 'users/:id', to: 'users#update'
