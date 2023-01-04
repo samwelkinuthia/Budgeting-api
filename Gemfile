@@ -58,3 +58,4 @@ end
 
 gem "rack-cors", "~> 1.1"
 gem 'activerecord-import'
+# gem "whenever", "~> 1.0", require: false

@@ -1,6 +1,9 @@
 class ReportsController < ApplicationController
   def index
-    
+
+    County.includes(:departments).each do |county|
+      
+    end
     c = County.find(params[:county_id])
     cbd = {county: c, countyBudgets: c.county_budgets}
     statuses = Project.all.map(&:status).uniq
