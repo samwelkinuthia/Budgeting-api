@@ -2,27 +2,32 @@ class ReportsController < ApplicationController
   include ActiveSupport::NumberHelper
   def index
     x = []
-    County.all.each do |county|
-      next unless county.projects.count > 0
-
-      budgetInfo = {
-        # county: county.name,
-        pending_bills: county.departments.sum(:pendingBills),
-        totalBudget: county.departments.sum(:totalBudget),
-        totalExpenditure: county.projects.sum(:spentAmount),
-        absorptionRate: num_to_p((county.projects.sum(:spentAmount) / county.departments.sum(:totalBudget)) * 100)
-      }
-      projectInfo = {
-        count: county.projects.size,
-        onGoing: county.projects.where(status: 'Ongoing').size
-      }
-      final = {
-        county: county.name,
-        budgetInfo: budgetInfo,
-        projectInfo: projectInfo
-      }
-      x.push(final)
+    elapsed = Benchmark.measure do
+      County.all.each do |county|
+        next unless county.projects.count > 0
+        budgetInfo = {
+          # county: county.name,
+          pending_bills: county.departments.sum(:pendingBills),
+          totalBudget: county.departments.sum(:totalBudget),
+          totalExpenditure: county.projects.sum(:spentAmount),
+          absorptionRate: num_to_p((county.projects.sum(:spentAmount) / county.departments.sum(:totalBudget)) * 100)
+        }
+        projectInfo = {
+          totalProjects: county.projects.size,
+          onGoing: county.projects.where(status: 'Ongoing').size,
+          new: county.projects.where(status: 'New').size,
+          complete: county.projects.where(status: 'Complete').size
+        }
+        final = {
+          countyName: county.name,
+          countyBudget: budgetInfo,
+          countyProjects: projectInfo
+        }
+        x.push(final)
+      end
     end
+    render json: {time: elapsed.real, data: x}
+
 
     c = County.find(params[:county_id])
     cbd = { county: c, countyBudgets: c.county_budgets }
@@ -50,7 +55,7 @@ class ReportsController < ApplicationController
       project_counts.push(a)
     end
 
-    render json:{overall_data: x,  individual_county_data: {projectCount: project_counts, countySummary: cbd, departmentSummary: department_summary, projectStatus: n}}
+    # render json:{overall_data: x,  individual_county_data: {projectCount: project_counts, countySummary: cbd, departmentSummary: department_summary, projectStatus: n}}
     # counties = County.includes(:departments).all
     # # c  = counties.map(&:counties)
     # render json: counties

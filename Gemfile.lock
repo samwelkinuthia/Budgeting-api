@@ -187,7 +187,6 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rolify (6.0.0)
     thor (1.2.1)
     timeout (0.3.1)
     tzinfo (2.0.5)
@@ -218,7 +217,6 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors (~> 1.1)
   rails (~> 7.0.4)
-  rolify
   tzinfo-data
 
 RUBY VERSION

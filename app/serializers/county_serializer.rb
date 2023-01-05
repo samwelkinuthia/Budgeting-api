@@ -1,4 +1,4 @@
 class CountySerializer < ActiveModel::Serializer
   # has_many :county_budgets
-  attributes :id, :name, :code, :departments, :county_budgets
+  attributes :name
 end

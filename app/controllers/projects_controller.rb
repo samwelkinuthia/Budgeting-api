@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.includes(:fiscal_year).all
+    @projects = Project.where(department_id:params[:department_id])
     json_response(@projects, :ok,  [], true, "#{@projects.size} records found")
 
   end

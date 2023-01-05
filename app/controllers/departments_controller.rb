@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   def index
-    @departments = Department.includes(:projects).where(county_id: params[:county_id])
+    @departments = Department.where(county_id: params[:county_id])
     json_response(@departments, :ok,  [], true, "#{@departments.length} records found")
   end
 

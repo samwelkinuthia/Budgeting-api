@@ -1,5 +1,4 @@
 class County < ApplicationRecord
-  resourcify
   has_many :county_budgets
   has_many :departments
   has_many :projects, through: :departments

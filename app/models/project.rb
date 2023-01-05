@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  belongs_to :department, counter_cache: true
+  belongs_to :department
   belongs_to :fiscal_year
   belongs_to :revenue_source
   has_one :county, through: :department

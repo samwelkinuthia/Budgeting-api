@@ -47,7 +47,6 @@ end
 gem "active_model_serializers"
 gem "devise"
 gem "devise_token_auth"
-gem "rolify"
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
