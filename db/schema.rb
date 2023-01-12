@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_163117) do
   create_table "counties", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "projects_count"
     t.index ["code"], name: "index_counties_on_code", unique: true
     t.index ["name"], name: "index_counties_on_name", unique: true
   end
@@ -81,6 +82,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -99,10 +106,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "county_id"
+    t.bigint "department_id"
+    t.bigint "user_type_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["county_id"], name: "index_users_on_county_id"
+    t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
   add_foreign_key "county_budgets", "counties"
@@ -111,4 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_035216) do
   add_foreign_key "projects", "departments"
   add_foreign_key "projects", "fiscal_years"
   add_foreign_key "projects", "revenue_sources"
+  add_foreign_key "users", "counties"
+  add_foreign_key "users", "departments"
+  add_foreign_key "users", "user_types"
 end
