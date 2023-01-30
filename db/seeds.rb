@@ -22,7 +22,7 @@ counties = JSON.parse("[{\"name\":\"Mombasa\",\"code\":1},{\"name\":\"Kwale\",\"
 #   County.create!(counties.sample)
 # end
 
-counties[1..20].each do |item|
+counties[1..10].each do |item|
   County.create!(item)
 end
 
