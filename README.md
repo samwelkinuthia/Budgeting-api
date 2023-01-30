@@ -1,5 +1,5 @@
 # Budgeting API
-
+API to track budgetary spending on a county and national level.
 ## Install
 
 ### Clone the repository
