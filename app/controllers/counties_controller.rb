@@ -4,8 +4,7 @@ class CountiesController < ApplicationController
   # GET /counties
   def index
     @counties = County.all
-
-    render json: @counties
+    json_response(@counties, :ok,  [], true, "#{@counties.size} records found")
   end
 
   # GET /counties/1
