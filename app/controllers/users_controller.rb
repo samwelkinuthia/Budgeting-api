@@ -12,6 +12,10 @@ class UsersController < ApplicationController
   def update
   end
 
+  def types
+    json_response(UserType.all, :ok,  [], true, "User types found")
+  end
+
   protected
 
   def set_user
