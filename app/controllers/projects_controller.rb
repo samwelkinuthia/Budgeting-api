@@ -19,11 +19,14 @@ class ProjectsController < ApplicationController
     quote_chars = %w(" | ~ ^ & *)
 
     begin
+
       csv = CSV.read(project_params[:file].tempfile, headers: :first_row, quote_char: quote_chars.shift)
       # @report = CSV.read(csv_file, headers: :first_row, quote_char: quote_chars.shift)
     rescue CSV::MalformedCSVError
       quote_chars.empty? ? raise : retry
     end
+
+    # binding.pry
 
     x = csv.map(&:to_h)
 
@@ -41,6 +44,8 @@ class ProjectsController < ApplicationController
       user_hash[:revenue_source_id] = project_params[:revenue_source_id]
       z.push(user_hash)
     end
+
+    # binding.pry
     import_csv(z)
   end
   # POST /projects
@@ -75,6 +80,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.permit(:title, :description, :department_id, :ward, :location, :status, :budgetAmount, :fiscal_year_id, :file, :revenue_source_id, :county_id)
+      params.permit(:title, :description, :department_id, :ward, :location, :status, :budgetAmount, :fiscal_year_id, :file, :revenue_source_id)
     end
 end
