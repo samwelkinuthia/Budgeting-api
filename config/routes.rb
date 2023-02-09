@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'reports', to: 'reports#index'
   get 'users', to: 'users#index'
   get 'users/:id', to: 'users#show'
+  get 'usertypes', to: 'users#types'
   put 'users/:id', to: 'users#update'
   post 'county_budgets/:countyId/:fiscalYearId', to: "county_budgets#create"
   resources :revenue_sources
