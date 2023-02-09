@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   def index
     x = []
-    elapsed = Benchmark.measure do
+    # elapsed = Benchmark.measure do
       County.includes([:projects]).all.each do |county|
         next unless county.projects.size > 0
         projects = county.projects
@@ -32,8 +32,8 @@ class ReportsController < ApplicationController
         }
         x.push(final)
       end
-    end
-    render json: {time: elapsed.real, data: x}
+    # end
+    render json: {data: x}
 
 
     # c = County.find(params[:county_id])
