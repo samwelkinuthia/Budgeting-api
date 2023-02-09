@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    json_response(@user, :ok,  [], true, "User found", ['roles'])
+    json_response(@user, :ok,  [], true, "User found")
   end
 
   def update
