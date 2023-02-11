@@ -26,6 +26,7 @@ class ReportsController < ApplicationController
           paused: total(projects, "Paused"),
         }
         final = {
+	  id:county.id,
           countyName: county.name,
           countyBudget: budgetInfo,
           countyProjects: projectInfo
