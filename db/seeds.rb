@@ -62,7 +62,7 @@ elapsed = Benchmark.measure do
   County.all.each do |county|
     CountyBudget.create!({"fiscal_year_id": 1, "county_id": county.id,"totalBudget": rand(1000000..9999999)})
 
-    rand(10..20).times do |item|
+    rand(5..10).times do |item|
       department = Department.create(county_id: county.id, name: "#{county.name} - #{Faker::Artist.name} Department - #{rand(0..5656)}", totalBudget: rand(1000000..9999999).to_d, developmentBudget: rand(1000000..9999999).to_d, recurrentBudget: rand(1000000..9999999).to_d, pendingBills: rand(1000000..9999999).to_d)
       rand(1..5).times do |proj|
         dept = department.projects.new(title: "#{Faker::Movies::StarWars.character} Project #{rand(999..1009992)}", description: Faker::Quote.famous_last_words, revenue_source_id: rand(1..3), department_id: Department.last.id, ward: Faker::Address.state, location: Faker::Address.state, status: %w[New OnGoing Complete Paused].sample, budgetAmount: rand(1000000..9999999).to_d, spentAmount: rand(100000..500000).to_d, fiscal_year_id: 1)
