@@ -1,5 +1,5 @@
 class DepartmentSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :totalBudget, :developmentBudget, :recurrentBudget, :pendingBills, :projects
   has_one :county
   has_many :projects
 end
