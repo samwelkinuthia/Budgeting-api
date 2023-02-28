@@ -62,5 +62,4 @@ DeviseTokenAuth.setup do |config|
   # config.send_confirmation_email = true
   # config.send_confirmation_email = true
   # config.default_confirm_success_url = "localhost:3001"
-
 end
