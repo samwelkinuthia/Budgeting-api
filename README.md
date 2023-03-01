@@ -1,5 +1,7 @@
 # Budgeting API
+
 API to track budgetary spending on a county and national level.
+
 ## Install
 
 ### Clone the repository
@@ -15,12 +17,10 @@ cd project
 ruby -v
 ```
 
-The ouput should start with something like `ruby 3.0.0`
-
 If not, install the right ruby version using [rbenv](https://github.com/rbenv/rbenv) (it could take a while):
 
 ```shell
-rbenv install 3.0.0
+rbenv install 3.2.0
 ```
 
 ### Install dependencies
@@ -31,19 +31,21 @@ Using [Bundler](https://github.com/bundler/bundler)
 bundle
 ```
 
-<!-- ### Set environment variables
-
-Using [Figaro](https://github.com/laserlemon/figaro):
-
-See [config/application.yml.sample](https://github.com/juliendargelos/project/blob/master/config/application.yml.sample) and contact the developer: [contact@juliendargelos.com](mailto:contact@juliendargelos.com) (sensitive data). -->
-
 ### Initialize the database
-
+You can customize the seeded user data by editing config/db/seeds.rb
 ```shell
-rails db:create db:migrate db:seed
+rails db:create
+rails db:migrate 
+rails db:seed
 ```
+
 ## Serve
 
 ```shell
 rails s
 ```
+
+### Documentation
+- Navigate to ```http://localhost:3000/api-docs/index.html``` for swagger api documentation.
+- Headers required: client, uid, access_token.
+- Authentication framework used is [Devise Token Auth](https://devise-token-auth.gitbook.io/devise-token-auth/).
