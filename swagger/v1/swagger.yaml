@@ -1,12 +1,153 @@
 ---
 openapi: 3.0.1
 info:
-  title: Oversight-KE API Documentation
+  title: API V1
   version: v1
 paths:
-  "/auth":
+  "/counties":
+    get:
+      summary: list counties
+      tags:
+      - Counties
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create county
+      tags:
+      - Counties
+      responses:
+        '200':
+          description: successful
+  "/counties/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show county
+      tags:
+      - Counties
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update county
+      tags:
+      - Counties
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete county
+      tags:
+      - Counties
+      responses:
+        '200':
+          description: successful
+  "/fiscal_years":
+    get:
+      summary: list fiscal_years
+      tags:
+      - Fiscal Year
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create fiscal_year
+      tags:
+      - Fiscal Year
+      responses:
+        '200':
+          description: successful
+  "/fiscal_years/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show fiscal_year
+      tags:
+      - Fiscal Year
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update fiscal_year
+      tags:
+      - Fiscal Year
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete fiscal_year
+      tags:
+      - Fiscal Year
+      responses:
+        '200':
+          description: successful
+  "/revenue_sources":
+    get:
+      summary: list revenue_sources
+      tags:
+      - Revenue Sources
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create revenue_source
+      tags:
+      - Revenue Sources
+      responses:
+        '200':
+          description: successful
+  "/revenue_sources/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show revenue_source
+      tags:
+      - Revenue Sources
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update revenue_source
+      tags:
+      - Revenue Sources
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete revenue_source
+      tags:
+      - Revenue Sources
+      responses:
+        '200':
+          description: successful
+  "/users":
+    get:
+      summary: list users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
     post:
       summary: create user
+      tags:
+      - Users
       parameters: []
       responses:
         '200':
@@ -26,12 +167,6 @@ paths:
               required:
               - name
               - model
-  "/users":
-    get:
-      summary: list users
-      responses:
-        '200':
-          description: successful
   "/users/{id}":
     parameters:
     - name: id
@@ -42,17 +177,23 @@ paths:
         type: string
     get:
       summary: show user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
     put:
       summary: update user
+      tags:
+      - Users
       responses:
         '200':
           description: successful
   "/usertypes":
     get:
       summary: types user
+      tags:
+      - Users
       responses:
         '200':
           description: successful

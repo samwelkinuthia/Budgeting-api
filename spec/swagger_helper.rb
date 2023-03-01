@@ -18,7 +18,7 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Oversight-KE API Documentation',
+        title: 'API V1',
         version: 'v1'
       },
       paths: {},

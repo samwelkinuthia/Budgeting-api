@@ -1,14 +1,10 @@
 require 'swagger_helper'
 
-RSpec.describe 'users', type: :request do
-  path '/users' do
-    get('list users') do
+RSpec.describe 'fiscal_years', type: :request do
+  path '/fiscal_years' do
+    get('list fiscal_years') do
       response(200, 'successful') do
-        tags 'Users'
-        consumes 'application/json'
-        # parameter name: 'client', in: :header, type: :string
-        # parameter name: 'access_token', in: :header, type: :string
-        # parameter name: 'uid', in: :header, type: :string
+        tags 'Fiscal Year'
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,19 +16,10 @@ RSpec.describe 'users', type: :request do
       end
     end
 
-    post('create user') do
+    post('create fiscal_year') do
       response(200, 'successful') do
-        tags 'Users'
-        consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
-          type: :object,
-          properties: {
-            email: { type: :string },
-            password: { type: :string },
-            password_confirmation: { type: :string }
-          },
-          required: %w[name model]
-        }
+        tags 'Fiscal Year'
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -45,13 +32,14 @@ RSpec.describe 'users', type: :request do
     end
   end
 
-  path '/users/{id}' do
+  path '/fiscal_years/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('show user') do
+    get('show fiscal_year') do
       response(200, 'successful') do
-        tags 'Users'
+        tags 'Fiscal Year'
+
         let(:id) { '123' }
 
         after do |example|
@@ -65,9 +53,10 @@ RSpec.describe 'users', type: :request do
       end
     end
 
-    put('update user') do
+    put('update fiscal_year') do
       response(200, 'successful') do
-        tags 'Users'
+        tags 'Fiscal Year'
+
         let(:id) { '123' }
 
         after do |example|
@@ -80,12 +69,12 @@ RSpec.describe 'users', type: :request do
         run_test!
       end
     end
-  end
 
-  path '/usertypes' do
-    get('types user') do
+    delete('delete fiscal_year') do
       response(200, 'successful') do
-        tags 'Users'
+        tags 'Fiscal Year'
+
+        let(:id) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {
